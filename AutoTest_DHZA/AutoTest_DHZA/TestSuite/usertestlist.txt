@@ -1,0 +1,10 @@
+test_user_register_1_code
+test_user_register_2_check
+test_user_register_3_checkcode
+test_user_register_4_register
+test_usre_login_1_getcode
+test_usre_login_2_login
+test_user_reset_1_code
+test_usre_reset_2_pwd
+test_usre_relogin_1_getcode
+test_usre_relogin_2_login

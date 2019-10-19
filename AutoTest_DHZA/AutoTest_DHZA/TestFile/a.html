@@ -1,0 +1,722 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="stylesheet" href="/static/ftl/sassexport.css" />
+  <title>施工日志详情 - SaaS平台</title>
+  <style type="text/css">
+    body {
+      font-family: "microsoft yahei";
+      font-size : 14px;
+    }
+
+    h3 {
+      font-size: 1.2em;
+    }
+
+    ul,
+    li {
+      list-style: none;
+    }
+
+    .work-container {
+      width: 96%;
+      margin-left: 2%;
+    }
+
+    .work-container .playRow {
+      margin: 15px 0;
+    }
+
+    .work-container .playRow>span {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 0.6em;
+    }
+
+    .work-container .logTableRow table tbody tr {
+      cursor: pointer;
+    }
+
+    .work-container .logTableRow table tbody tr:hover td div {
+      color: #409eff;
+    }
+
+    .dialogTitleIcon {
+      font-weight: bold;
+      background: #c0ffc5;
+      color: #07ad15;
+      padding: 6px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .shareContainer {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .shareContainer span {
+      position: absolute;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border: 5px solid #4ca3fa;
+    }
+
+    .shareContainer span:nth-child(1) {
+      top: -5px;
+      left: -5px;
+    }
+
+    .shareContainer span:nth-child(2) {
+      top: -5px;
+      left: 165px;
+    }
+
+    .shareContainer span:nth-child(3) {
+      top: 165px;
+      left: -5px;
+    }
+
+    .shareContainer span:nth-child(4) {
+      top: 165px;
+      left: 165px;
+    }
+
+    .shareContainer .shareQrCode {
+      border: 8px solid #d0e7fd;
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+    }
+
+    .shareContainer .shareQrCode img {
+      width: 96%;
+      height: 96%;
+      margin: 2% auto auto 2%;
+    }
+
+    .logBaseInfo {
+      overflow: hidden;
+      width: 50%;
+    }
+
+    .logBaseInfo p span.text-content {
+      margin-right: 20px;
+    }
+
+    .personnel .el-table {
+      font-size: 12px !important;
+    }
+
+    .material .el-table {
+      font-size: 12px !important;
+    }
+
+    .machine {
+      border-bottom: 1px solid #d1d4da;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .machine .el-table {
+      font-size: 12px !important;
+    }
+
+    .condetionContainer .descCard {
+      border: 1px solid #ececec;
+      border-width: 0 1px 1px 1px;
+      width: 480px;
+      font-size: 14px;
+      margin: 0 0 20px 0;
+      border-radius: 5px;
+    }
+
+    .condetionContainer .descCard .descCardHeade {
+      background: #ececec;
+      text-align: center;
+      padding: 12px 0 !important;
+    }
+
+    .condetionContainer .descCard .descContent {
+      padding: 20px;
+    }
+
+    .condetionContainer .specList {
+      margin: 0;
+      padding: 0;
+      max-width: 925px;
+      overflow: hidden;
+    }
+
+    .condetionContainer .specList li {
+      float: left;
+      width: 23%;
+      margin-right: 2%;
+      margin-bottom: 20px;
+      text-align: center;
+      border: 1px solid #ececec;
+      border-radius: 5px;
+    }
+
+    .condetionContainer .specList li img {
+      width: 100%;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .condetionContainer .specList li p {
+      font-size: 14px;
+    }
+
+    .work-container {
+      overflow: hidden;
+      overflow-y: scroll;
+      width: 96%;
+      height: 100%;
+      margin-left: 2%;
+    }
+
+    .work-container .detailBtnsRow i {
+      color: #409eff;
+    }
+
+    .work-container {
+      width: 96%;
+      margin-left: 2%;
+    }
+
+    .work-container .selectWorkscope span {
+      font-size: 0.8em;
+    }
+
+    .work-container .infoTableRow {
+      overflow: hidden;
+    }
+
+    .work-container .infoTableRow .tableBody {
+      border: 1px solid #dddeff;
+      width: 49.5%;
+      padding: 10px 0;
+    }
+
+    .work-container .infoTableRow .tableBody .infoTableTop {
+      margin: 10px 0;
+      border-left: 5px solid #409eff;
+      overflow: hidden;
+    }
+
+    .work-container .infoTableRow .tableBody .infoTableTop>span {
+      font-size: 0.8em;
+    }
+
+    .work-container .infoTableRow .tableBody .infoTableTop>span:first-child {
+      float: left;
+      margin-left: 10px;
+    }
+
+    .work-container .infoTableRow .tableBody .infoTableTop>span:last-child {
+      float: right;
+      margin-right: 10px;
+    }
+
+    .work-container .infoTableRow .tableBody .infoTableTop>span:last-child a {
+      color: #409eff;
+    }
+
+    .work-container .infoTableRow .tableBody .el-table {
+      font-size: 0.5em;
+    }
+
+    .work-container .infoTableRow .tableBody:nth-child(1) {
+      float: left;
+    }
+
+    .work-container .infoTableRow .tableBody:nth-child(2) {
+      float: right;
+    }
+
+    .logBaseInfo .el-input,
+    .logBaseInfo .el-select {
+      width: auto !important;
+      max-width: 160px;
+    }
+
+    .logBaseInfo p span.text-content {
+      margin-right: 20px;
+    }
+
+    .personnel .altTitleRow .el-checkbox {
+      margin-top: 25px;
+    }
+
+    .personnel .el-table {
+      font-size: 12px !important;
+    }
+
+    .personnel .el-table .el-input {
+      width: 40px;
+    }
+
+    .personnel .el-table .el-icon-delete {
+      color: red;
+    }
+
+    .personnel .logEditSertBtn {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .material .altTitleRow .el-checkbox {
+      margin-top: 25px;
+    }
+
+    .material .el-table {
+      font-size: 12px !important;
+    }
+
+    .material .el-table tr td:nth-child(3) .el-input,
+    .material .el-table tr td:nth-child(4) .el-input {
+      width: 40px;
+    }
+
+    .material .el-table .el-icon-delete {
+      color: red;
+    }
+
+    .material .logEditSertBtn {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .machine {
+      border-bottom: 1px solid #d1d4da;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .machine .altTitleRow .el-checkbox {
+      margin-top: 25px;
+    }
+
+    .machine .el-table {
+      font-size: 12px !important;
+    }
+
+    .machine .el-table tr td:nth-child(3) .el-input {
+      width: 50px;
+    }
+
+    .machine .el-table .el-icon-delete {
+      color: red;
+    }
+
+    .machine .logEditSertBtn {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .condetionContainer .descCard {
+      width: 480px;
+      font-size: 14px;
+      margin: 0 0 20px 0;
+      border-radius: 5px;
+    }
+
+    .condetionContainer .descCard .descCardHeade {
+      background: #ececec;
+      text-align: center;
+      padding: 12px 0 !important;
+    }
+
+    .condetionContainer .descCard .descContent .el-input {
+      border: none !important;
+    }
+
+    .condetionContainer .descCard .logEditSertBtn {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .condetionContainer .specList {
+      margin: 0;
+      padding: 0;
+      max-width: 925px;
+      overflow: hidden;
+    }
+
+    .condetionContainer .specList li {
+      float: left;
+      width: 23%;
+      height: 200px;
+      margin-right: 2%;
+      margin-bottom: 20px;
+      text-align: center;
+      border: 1px solid #ececec;
+      border-radius: 5px;
+    }
+
+    .condetionContainer .specList li img {
+      width: 100%;
+      border-radius: 5px 5px 0 0;
+    }
+
+    .condetionContainer .specList li p {
+      font-size: 14px;
+    }
+
+    .work-container {
+      border: 1px solid ccc;
+      width: 90%;
+      margin: 20px auto;
+      background: #f8f8f8;
+    }
+
+    .work-container .detailBtnsRow i {
+      color: #409eff;
+    }
+
+    .tableTitle {
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+
+    .tableTitle>div {
+      float: right;
+      margin-right: 10px;
+      width: 100px;
+      height: 16px;
+      line-height: 16px;
+      font-weight: 200;
+      font-size: 14px;
+    }
+
+    .tableTitle>div>input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .tableTitle>div>span,
+    .tableTitle>div>input {
+      vertical-align: middle;
+      font-size: 12px;
+    }
+    .el-table,table,th,tr,td{
+      background: transparent !important;
+    }
+
+    table {
+    border-collapse: separate;
+    white-space: normal;
+    line-height: normal;
+    font-weight: normal;
+    font-size: medium;
+    font-style: normal;
+    color: -internal-quirk-inherit;
+    text-align: start;
+    border-spacing: 2px;
+    font-variant: normal;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+    th {
+    padding: 12px 0;
+    min-width: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    position: relative;
+    text-align: left;
+}
+
+    .cell {
+        position: relative;
+        word-wrap: normal;
+        text-overflow: ellipsis;
+        display: inline-block;
+        vertical-align: middle;
+        width: 100%;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0 10px;
+    }
+
+    thead .cell{
+      color: #909399;
+    }
+    td{
+      text-align: center !important;
+    }
+    th, tr{
+      height: 35px  !important;
+      border-bottom: 1px solid #EBEEF5 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="work-container">
+    <h3>施工日志详情ssss</h3>
+    <div class="detailBtnsRow el-row">
+      <button type="button" class="el-button el-button--default el-button--mini is-round">导出Excel</button>
+    </div>
+    <div class="el-row">
+      <div class="logBaseInfo">
+        <div class="tableTitle">基本信息</div>
+        <p><span class="text-gay">工序名称：</span><span class="text-content">混凝土浇注</span><span
+            class="text-gay">类别：</span><span class="text-content">土木</span><span class="text-gay">日期：</span><span
+            class="text-content">2019-02-12</span></p>
+        <p><span class="text-gay">平均气温：</span><span class="text-content">30℃</span><span
+            class="text-gay">上午：</span><span class="text-content">晴</span><span class="text-gay">下午：</span><span
+            class="text-content">大雨</span></p>
+        <p><span class="text-gay">施工时间：</span><span class="text-content">2019/01/22 - 2019/03/24</span>
+        </p>
+        <p><span class="text-gay">施工作业面：</span><span class="text-content" style="margin-right: 20px;">作业面A</span><span
+            class="text-content" style="margin-right: 20px;">作业面B</span><span class="text-content" style="margin-right: 20px;">作业面C</span>
+        </p>
+      </div>
+    </div>
+    <div class="el-row">
+      <div class="personnel">
+        <div class="tableTitle">
+          人员信息
+        </div>
+        <div id="personInfo"
+          style="width: 100%;">
+          <div>
+            <table cellspacing="0" cellpadding="0" border="0">
+              <thead>
+                <tr class="">
+                  <th colspan="1" rowspan="1">
+                    <div class="cell">考勤组</div>
+                  </th>
+                  <th colspan="1" rowspan="1" >
+                    <div class="cell">人数</div>
+                  </th>
+                  <th colspan="1" rowspan="1">
+                    <div class="cell">日均工作时长</div>
+                  </th>
+                  <th colspan="1" rowspan="1">
+                    <div class="cell">日均工作总时长</div>
+                  </th>
+                  <th colspan="1" rowspan="1">
+                    <div class="cell">日均作业面工作时长</div>
+                  </th>
+                  <th colspan="1" rowspan="1">
+                    <div class="cell">日均作业面工作总时长</div>
+                  </th>
+                  <th class="gutter" style="width: 0px; display: none;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="el-table__row">
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">监理组A</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">8</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">26</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">21</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">26</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">21</div>
+                  </td>
+                </tr>
+                <tr class="el-table__row">
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">监理组A</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">41</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">24</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">13</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">24</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">13</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="el-row">
+      <div class="material">
+        <div class="tableTitle">
+          材料进场情况
+        </div>
+        <div id="cailiao"
+          style="width: 100%;">
+          <div>
+            <table cellspacing="0" cellpadding="0" border="0" >
+              <thead class="has-gutter">
+                <tr class="">
+                  <th colspan="1" rowspan="1" >
+                    <div class="cell">材料名称</div>
+                  </th>
+                  <th colspan="1" rowspan="1" >
+                    <div class="cell">厂家名称</div>
+                  </th>
+                  <th colspan="1" rowspan="1" >
+                    <div class="cell">品种规格</div>
+                  </th>
+                  <th colspan="1" rowspan="1" >
+                    <div class="cell">数量</div>
+                  </th>
+                  <th class="gutter" style="width: 0px; display: none;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="el-table__row">
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">手推车</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">成都某厂</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">8</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">8</div>
+                  </td>
+                </tr>
+                <tr class="el-table__row">
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">手推车</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">上海某厂</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">41</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">41</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="el-row">
+      <div class="machine">
+        <div class="tableTitle">
+          现场机械使用情况
+        </div>
+        <div id="jixie" class="" style="width: 100%;">
+          <div>
+            <table cellspacing="0" cellpadding="0" border="0">
+              <thead class="has-gutter">
+                <tr class="">
+                  <th colspan="1" rowspan="1">
+                    <div class="cell">机械名称</div>
+                  </th>
+                  <th colspan="1" rowspan="1">
+                    <div class="cell">机型</div>
+                  </th>
+                  <th colspan="1" rowspan="1">
+                    <div class="cell">工作时长</div>
+                  </th>
+                  <th class="gutter" style="width: 0px; display: none;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="el-table__row">
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">手推车</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">8</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">26</div>
+                  </td>
+                </tr>
+                <tr class="el-table__row">
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">手推车</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">41</div>
+                  </td>
+                  <td rowspan="1" colspan="1">
+                    <div class="cell">24</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="el-row">
+      <div class="condetionContainer">
+        <section>
+          <div class="descCard">
+            <div class="descCardHeade"><span>施工描述</span></div>
+            <div class="descContent"><span class="text-gay">水电：</span>
+              <p>1、5#楼双电源箱及EPS箱安装完成</p>
+              <p>2、3#区域管网安装完成100%</p>
+              <p>3、6#楼区域东侧室外管网安装完成</p>
+            </div>
+          </div>
+        </section>
+        <ul class="specList" style="width: 100%;">
+          <li><img
+              src="http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=svg&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2071584020,2383499244&os=1518201335,1972649820&simid=4178477718,745062993&pn=2&rn=1&di=207900&ln=1183&fr=&fmq=1568708357073_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fimg3.orsoon.com%2Fico%2F201711%2F16093806_7e94829a30.png&rpstart=0&rpnum=0&adpicid=0&force=undefined" />
+            <p>建筑工地现场细节1</p>
+          </li>
+          <li><img
+              src="http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=svg&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2071584020,2383499244&os=1518201335,1972649820&simid=4178477718,745062993&pn=2&rn=1&di=207900&ln=1183&fr=&fmq=1568708357073_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fimg3.orsoon.com%2Fico%2F201711%2F16093806_7e94829a30.png&rpstart=0&rpnum=0&adpicid=0&force=undefined" />
+            <p>建筑工地现场细节2</p>
+          </li>
+          <li><img
+              src="http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=svg&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2071584020,2383499244&os=1518201335,1972649820&simid=4178477718,745062993&pn=2&rn=1&di=207900&ln=1183&fr=&fmq=1568708357073_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fimg3.orsoon.com%2Fico%2F201711%2F16093806_7e94829a30.png&rpstart=0&rpnum=0&adpicid=0&force=undefined" />
+            <p>建筑工地现场细节3</p>
+          </li>
+          <li><img
+              src="http://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=svg&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&hd=undefined&latest=undefined&copyright=undefined&cs=2071584020,2383499244&os=1518201335,1972649820&simid=4178477718,745062993&pn=2&rn=1&di=207900&ln=1183&fr=&fmq=1568708357073_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fimg3.orsoon.com%2Fico%2F201711%2F16093806_7e94829a30.png&rpstart=0&rpnum=0&adpicid=0&force=undefined" />
+            <p>建筑工地现场细节4</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/static/ftl/sassexport.js"></script>
+</body>
+
+</html>
